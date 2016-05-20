@@ -1,0 +1,2 @@
+defmodule WeatherXml do
+end
