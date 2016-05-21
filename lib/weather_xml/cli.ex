@@ -1,12 +1,15 @@
 defmodule WeatherXml.CLI do
-
+  import WeatherXml.WeatherGov, only: [convert_to_list_of_maps: 1,
+                                                    xml_parser: 1,
+                                                 remove_blanks: 1]
+  import WeatherXml.OutputFormatter, only: [pretty_table: 1]
   @moduledoc """
   Handle the command line parsing and the dispatch to
   the various functions that end up generating a
   table of the weather conditions at a given location
   """
 
-  def run(argv) do
+  def main(argv) do
     argv
     |> parse_args
     |> process
@@ -45,6 +48,11 @@ defmodule WeatherXml.CLI do
   def process(location_code) do
     WeatherXml.WeatherGov.fetch(location_code)
     |> decode_response
+    |> xml_parser
+    |> convert_to_list_of_maps
+    |> Enum.filter(&remove_blanks/1)
+    |> pretty_table
+
   end
 
   def decode_response({:ok, body}), do: body
@@ -55,6 +63,5 @@ defmodule WeatherXml.CLI do
   def decode_response({:error, reason}) do
     IO.inspect reason
     System.halt(4)
-  end 
-
+  end
 end

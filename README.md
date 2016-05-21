@@ -2,6 +2,16 @@
 
 **TODO: Add description**
 
+## TODO
+
+* Additional modules to return list of all cities, with corresponding station_id
+* Write tests for all untested modules
+* Include more Weather data fields
+* Parse XML in a better way, auto-extracting all extractable fields
+* Document this code using Ex-Doc
+* Better Error logging using Logger
+* **Publish on GitHub**
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
@@ -17,4 +27,3 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
         def application do
           [applications: [:weather_xml]]
         end
-

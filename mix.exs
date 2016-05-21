@@ -4,6 +4,7 @@ defmodule WeatherXml.Mixfile do
   def project do
     [app: :weather_xml,
      version: "0.0.1",
+     escript: escript_config,
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -28,7 +29,12 @@ defmodule WeatherXml.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      httpoison: "~> 0.8"
+      httpoison: "~> 0.8",
+      tabula: "~> 2.0"
     ]
+  end
+
+  defp escript_config do
+    [ main_module: WeatherXml.CLI ]
   end
 end
